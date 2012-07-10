@@ -14,7 +14,6 @@
 // Given encoded message "12", it could be decoded as "AB" (1 2) or "L" (12).
 //
 // The number of ways decoding "12" is 2.
-// TODO improve performance to pass large test cases
 //============================================================================
 
 #include <iostream>
@@ -22,29 +21,41 @@ using namespace std;
 
 class Solution {
 public:
-    int numDecodingsHelper(string s) {
+    int numDecodings(string s) {
         int N = s.size();
         if (N == 0) return 0;
-        if (N == 1) return (s[0] == '0') ? 0 : 1;
-        if (N == 2) {
-            if (s[0] == '0') return 0;
-            if (s[1] == '0') return (s[0] <= '2') ? 1 : 0;
-            if (s[0] <= '2' && s[1] <= '6') return 2;
-            return 1;
-        }
+        int dp[N];
         if (s[0] == '0') return 0;
-        if (s[1] == '0') {
-            if (s[0] <= '2') return numDecodingsHelper(s.substr(2, N-2));
-            return 0;
+        dp[0] = 1;
+        if (s[0] == '1') {
+            if (s[1] == '0') dp[1] = 1;
+            else dp[1] = 2;
         }
-        if (s[0] <= '2' && s[1] <= '6')
-            return numDecodingsHelper(s.substr(1, N-1))
-                    + numDecodingsHelper(s.substr(2, N-2));
-        return numDecodingsHelper(s.substr(1, N-1));
-    }
+        else if (s[0] == '2') {
+            if (s[1] == '0' || s[1] > '6') dp[1] = 1;
+            else dp[1] = 2;
+        }
+        else {
+            if (s[1] == '0') return 0;
+            dp[1] = 1;
+        }
 
-    int numDecodings(string s) {
-        return numDecodingsHelper(s);
+        for (int i = 2; i < N; i++) {
+            if (s[i-1] == '1') {
+                if (s[i] == '0') dp[i] = dp[i-2];
+                else dp[i] = dp[i-1] + dp[i-2];
+            }
+            else if (s[i-1] == '2') {
+                if (s[i] == '0') dp[i] = dp[i-2];
+                else if (s[i] > '6') dp[i] = dp[i-1];
+                else dp[i] = dp[i-1] + dp[i-2];
+            }
+            else {
+                if (s[i] == '0') return 0;
+                dp[i] = dp[i-1];
+            }
+        }
+        return dp[N-1];
     }
 };
 
