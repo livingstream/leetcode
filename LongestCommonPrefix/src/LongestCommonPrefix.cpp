@@ -13,17 +13,15 @@ public:
     string longestCommonPrefix(vector<string> &strs) {
         int N = strs.size();
         if (N == 0) return "";
-        if (N == 1) return strs[0];
-        size_t i = 0;
-        while (true) {
-            if (strs[0].size() <= i) break;
-            char c = strs[0][i];
-            for (int k = 1; k < N; k++) {
-                if (strs[k].size() <= i || strs[k][i] != c) return strs[k].substr(0, i);
+        int l = 0;
+        while (l < strs[0].size()) {
+            for (int i = 1; i < N; i++) {
+                if (l == strs[i].size() || strs[i][l] != strs[0][l])
+                    return strs[i].substr(0, l);
             }
-            i++;
+            l++;
         }
-        return strs[0].substr(0, i);
+        return strs[0];
     }
 };
 
