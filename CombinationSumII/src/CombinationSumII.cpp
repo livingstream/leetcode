@@ -24,8 +24,8 @@ using namespace std;
 
 class Solution {
 public:
-    vector<vector<int> > combinationSum2(vector<int> &candidates, int target, vector<vector<int> > result) {
-        result.clear();
+    vector<vector<int> > combinationSum2(vector<int> &candidates, int target) {
+        vector<vector<int> > result;
         int sum = 0;
         for (vector<int>::iterator it = candidates.begin(); it != candidates.end(); it++) sum += *it;
         sort(candidates.begin(), candidates.end());
@@ -37,11 +37,10 @@ public:
 
     void combinationSumHelper(vector<int> &candidates, int target, size_t i, vector<int> combination, vector<vector<int> > &result) {
         if (target <= 0) {
-            if (target == 0) {
-                if (find(result.begin(), result.end(), combination) == result.end()) {
+            if (target == 0)
+                if (find(result.begin(), result.end(), combination) == result.end())
                     result.push_back(combination);
-                }
-            }
+            return;
         }
         if (i == candidates.size()) return;
         combinationSumHelper(candidates, target, i + 1, combination, result);

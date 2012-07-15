@@ -24,12 +24,8 @@ class Solution {
 public:
     vector<vector<int> > combinationSum(vector<int> &candidates, int target) {
         vector<vector<int> > result;
-        result.clear();
-        int sum = 0;
-        for (size_t i = 0; i < candidates.size(); i++)
-            sum += candidates[i];
         sort(candidates.begin(), candidates.end());
-        if (candidates[0] > target || target > sum) return result;
+        if (candidates[0] > target) return result;
         vector<int> combination;
         combinationSumHelper(candidates, target, 0, combination, result);
         return result;
@@ -37,11 +33,10 @@ public:
 
     void combinationSumHelper(vector<int> &candidates, int target, size_t i, vector<int> combination, vector<vector<int> > &result) {
         if (target <= 0) {
-            if (target == 0) {
-                if (find(result.begin(), result.end(), combination) == result.end()) {
+            if (target == 0)
+                if (find(result.begin(), result.end(), combination) == result.end())
                     result.push_back(combination);
-                }
-            }
+            return;
         }
         if (i == candidates.size()) return;
         for (int j = 0; j * candidates[i] <= target; j++) {
