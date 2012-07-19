@@ -5,22 +5,22 @@
 // or null if needle is not part of haystack.
 //============================================================================
 
-#include <iostream>
-using namespace std;
+#include <cstring>
 
 class Solution {
 public:
     char *strStr(char *haystack, char *needle) {
-        if (haystack == NULL || needle == NULL || !*needle) return haystack;
-        char *p1e = haystack, *p1 = haystack, *p2 = needle;
-        while (*++p2) p1e++;
-        while (*p1e) {
-            char *p1b = p1;
-            char *p2 = needle;
-            while (*p1 && *p2 && *p1 == *p2) ++p1, ++p2;
-            if (!*p2) return p1b;
-            p1 = p1b + 1;
-            p1e++;
+        if (!haystack || !needle) return haystack;
+        int n = strlen(haystack);
+        int m = strlen(needle);
+        int i = 0;
+        while (i < n-m+1) {
+            int j = 0;
+            while (j < m && haystack[i] == needle[j]) {
+                i++, j++;
+            }
+            if (j == m) return haystack+(i-j);
+            i = i-j+1;
         }
         return NULL;
     }
