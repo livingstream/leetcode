@@ -5,52 +5,31 @@
 //============================================================================
 
 #include <iostream>
-#include <algorithm>
 using namespace std;
 
 class Solution {
 public:
     string longestPalindrome(string s) {
-        int m = s.length();
-        string T = "^";
-        for (int i = 0; i < m; i++)
-            T += "#" + s.substr(i, 1);
-        T += "#$";
-        int n = T.length();
-        int *P = new int[n];
-        int C = 0, R = 0;
-        for (int i = 1; i < n-1; i++) {
-            int i_mirror = 2*C-i; // equals to i' = C - (i-C)
-
-            P[i] = (R > i) ? min(R-i, P[i_mirror]) : 0;
-
-            // Attempt to expand palindrome centered at i
-            while (T[i + 1 + P[i]] == T[i - 1 - P[i]])
-                P[i]++;
-
-            // If palindrome centered at i expand past R,
-            // adjust center based on expanded palindrome.
-            if (i + P[i] > R) {
-                C = i;
-                R = i + P[i];
+        int n = s.size();
+        if (n == 0) return "";
+        int maxi = 0;
+        int maxl = 1;
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < 2; j++) {
+                int start = i - j;
+                int end = i + 1;
+                while (start > 0 && end < n && s[start] == s[end])
+                    start--, end++;
+                int len = end - start - 1;
+                if (len > maxl) maxi = start, maxl = len;
             }
         }
-
-        // Find the maximum element in P.
-        int maxLen = 0;
-        int centerIndex = 0;
-        for (int i = 1; i < n-1; i++) {
-            if (P[i] > maxLen) {
-                maxLen = P[i];
-                centerIndex = i;
-            }
-        }
-        delete[] P;
-
-        return s.substr((centerIndex - 1 - maxLen)/2, maxLen);
+        return s.substr(maxi, maxl);
     }
 };
 
 int main() {
-	return 0;
+    Solution solution;
+    cout << solution.longestPalindrome("google");
+    return 0;
 }
