@@ -18,9 +18,10 @@ public:
             for (int j = 0; j < 2; j++) {
                 int start = i - j;
                 int end = i + 1;
-                while (start > 0 && end < n && s[start] == s[end])
+                while (start >= 0 && end < n && s[start] == s[end])
                     start--, end++;
-                int len = end - start - 1;
+                start++, end--;
+                int len = end - start + 1;
                 if (len > maxl) maxi = start, maxl = len;
             }
         }
