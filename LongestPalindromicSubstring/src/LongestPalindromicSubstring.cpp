@@ -30,7 +30,5 @@ public:
 };
 
 int main() {
-    Solution solution;
-    cout << solution.longestPalindrome("google");
     return 0;
 }
