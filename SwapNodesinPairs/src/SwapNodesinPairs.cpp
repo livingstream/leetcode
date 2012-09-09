@@ -23,6 +23,26 @@ struct ListNode {
 class Solution {
 public:
     ListNode *swapPairs(ListNode *head) {
+//        return swapPairs1(head);
+        return swapPairs2(head);
+    }
+
+    ListNode* swapPairs1(ListNode *head) {
+        swapPairsHelper(head);
+        return head;
+    }
+
+    void swapPairsHelper(ListNode*& curNode) {
+        if(curNode == NULL or curNode->next == NULL) return;
+        ListNode* nextNode = curNode->next;
+        ListNode* nextNext = nextNode->next;
+        swapPairsHelper(nextNext);
+        nextNode->next = curNode;
+        curNode->next = nextNext;
+        curNode = nextNode;
+    };
+
+    ListNode *swapPairs2(ListNode *head) {
         ListNode *preNode = NULL;
         ListNode *curNode = head;
         while (curNode != NULL) {
