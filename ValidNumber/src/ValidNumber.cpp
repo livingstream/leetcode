@@ -14,11 +14,12 @@
 
 #include <iostream>
 #include <cstring>
+
 using namespace std;
 
 class Solution {
 public:
-    bool isNumber(const char *s) {
+    bool isNumber(const char* s) {
         // trim leading/trailing spaces
         while (*s != '\0' && isspace(*s)) s++;
         if (*s == '\0') return false;
@@ -56,5 +57,5 @@ public:
 };
 
 int main() {
-    return 0;
+   return 0;
 }

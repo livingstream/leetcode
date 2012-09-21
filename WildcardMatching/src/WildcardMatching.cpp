@@ -25,28 +25,19 @@ using namespace std;
 
 class Solution {
 public:
-    bool isMatch(const char *s, const char *p) {
-        if(*s=='\0'){
-            if(*p=='\0')
-                return true;
-            else if(*p=='*')
-                return isMatch(s, p+1);
-            else
-                return false;
+    bool isMatch(const char* s, const char* p) {
+        if (*s == '\0') {
+            if (*p == '\0') return true;
+            if (*p == '*') return isMatch(s,p+1);
+            return false;
         }
-        else{
-            if(*p=='\0')
-                return false;
-            else if(*p=='?' || *p==*s)
-                return isMatch(s+1,p+1);
-            else if(*p=='*')
-                return isMatch(s+1,p) || isMatch(s,p+1);
-            else
-                return false;
-        }
+        if (*p == '\0') return false;
+        if (*p == '?' || *p == *s) return isMatch(s+1, p+1);
+        if (*p=='*') return isMatch(s+1,p) || isMatch(s, p+1);
+        return false;
     }
 };
 
 int main() {
-    return 0;
+   return 0;
 }

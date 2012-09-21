@@ -20,13 +20,13 @@ public:
         int N = num.size();
         sort(num.begin(), num.end());
         int res = num[0] + num[1] + num[2];
-        for (int k = 0; k < N - 2; k++) {
-            int i = k + 1;
-            int j = N - 1;
+        for (int k = 0; k < N-2; k++) {
+            int i = k+1;
+            int j = N-1;
             while (i < j) {
                 int sum = num[i] + num[j] + num[k];
                 if (sum == target) return sum;
-                if (abs(sum - target) < abs(res - target)) res = sum;
+                if (abs(sum-target) < abs(res-target)) res = sum;
                 if (sum > target) j--;
                 else i++;
             }

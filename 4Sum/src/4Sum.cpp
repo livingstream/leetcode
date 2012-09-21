@@ -31,7 +31,7 @@ public:
     int value;
 };
 
-struct TwoSumCompare {
+struct increaing {
     bool operator() (TwoSum ts1, TwoSum ts2) {
         if (ts1.value == ts2.value){
             if (ts1.index1 == ts1.index1) return (ts1.index2 < ts2.index2);
@@ -40,64 +40,57 @@ struct TwoSumCompare {
         else
             return (ts1.value < ts2.value);
     }
-} twoSumCompare;
+};
 
 class Solution {
-private:
-    vector<vector<int> > result;
-    vector<TwoSum> twoSum;
-
 public:
-    int find_start_index(int begin, int end, int val){
-        int mid;
-        while (begin <= end){
-            mid = begin + (end - begin) / 2;
-            if (twoSum[mid].value >= val) end = mid - 1;
+    int find_start_index(vector<TwoSum>& twoSums, int begin, int end, int val){
+        while (begin <= end) {
+            int mid = begin + (end - begin) / 2;
+            if (twoSums[mid].value >= val) end = mid - 1;
             else begin = mid + 1;
         }
         return end + 1;
-    }
+    };
 
-    int find_end_index(int begin, int end, int val){
-        int mid;
-        while (begin <= end){
-            mid = begin + (end - begin) / 2;
-            if (twoSum[mid].value <= val) begin = mid + 1;
+    int find_end_index(vector<TwoSum>& twoSums, int begin, int end, int val){
+        while (begin <= end) {
+            int mid = begin + (end - begin) / 2;
+            if (twoSums[mid].value <= val) begin = mid + 1;
             else end = mid - 1;
         }
         return begin - 1;
     }
 
     vector<vector<int> > fourSum(vector<int> &num, int target) {
-        twoSum.clear();
-        result.clear();
-        size_t i, j;
-        for (i = 0; i < num.size(); i++){
-            for (j=i + 1; j < num.size(); j++){
-                TwoSum ts(i, j, num[i] + num[j]);
-                twoSum.push_back(ts);
+        // calculate sum for every two elements and sort
+        vector<TwoSum> twoSums;
+        for (size_t i = 0; i < num.size(); i++){
+            for (size_t j = i + 1; j < num.size(); j++) {
+                twoSums.push_back(TwoSum(i, j, num[i] + num[j]));
             }
         }
-        sort(twoSum.begin(), twoSum.end(), twoSumCompare);
-        for (i = 0; i < twoSum.size(); i++){
+        sort(twoSums.begin(), twoSums.end(), increaing());
+
+        vector<vector<int> > result;
+        for (size_t i = 0; i < twoSums.size(); i++){
             size_t begin, end;
-            int val = target - twoSum[i].value;
+            int val = target - twoSums[i].value;
 
-            begin = find_start_index(i + 1, twoSum.size() - 1, val);
-            end = find_end_index(i + 1, twoSum.size() - 1, val);
+            begin = find_start_index(twoSums, i + 1, twoSums.size() - 1, val);
+            end = find_end_index(twoSums, i + 1, twoSums.size() - 1, val);
 
-            for (j = begin; j <= end; j++){
-                if (twoSum[j].index1 == twoSum[i].index1) continue;
-                if (twoSum[j].index2 == twoSum[i].index1) continue;
-                if (twoSum[j].index1 == twoSum[i].index2) continue;
-                if (twoSum[j].index2 == twoSum[i].index2) continue;
+            for (size_t j = begin; j <= end; j++) {
+                if (twoSums[j].index1 == twoSums[i].index1) continue;
+                if (twoSums[j].index2 == twoSums[i].index1) continue;
+                if (twoSums[j].index1 == twoSums[i].index2) continue;
+                if (twoSums[j].index2 == twoSums[i].index2) continue;
 
                 vector<int> tmp;
-                tmp.push_back(num[ twoSum[i].index1]);
-                tmp.push_back(num[ twoSum[i].index2]);
-                tmp.push_back(num[ twoSum[j].index1]);
-                tmp.push_back(num[ twoSum[j].index2]);
-
+                tmp.push_back(num[ twoSums[i].index1]);
+                tmp.push_back(num[ twoSums[i].index2]);
+                tmp.push_back(num[ twoSums[j].index1]);
+                tmp.push_back(num[ twoSums[j].index2]);
                 sort(tmp.begin(), tmp.end());
 
                 if (find(result.begin(), result.end(), tmp) == result.end())
@@ -105,7 +98,7 @@ public:
             }
         }
         return result;
-    }
+    };
 };
 
 int main() {

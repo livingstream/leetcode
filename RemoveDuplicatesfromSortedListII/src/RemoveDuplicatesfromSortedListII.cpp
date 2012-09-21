@@ -23,30 +23,37 @@ struct ListNode {
 class Solution {
 public:
     ListNode *deleteDuplicates(ListNode *head) {
-        ListNode *frontNode = head;
-        ListNode *backHead = NULL, *backNode = NULL;
-        while (frontNode != NULL) {
+        if (head == NULL || head->next == NULL) return head;
+        ListNode* newHead = NULL, *newNode = NULL;
+        ListNode* curNode = head;
+        while (curNode != NULL) {
             bool found = true;
-            while (frontNode->next != NULL && frontNode->val == frontNode->next->val) {
-                ListNode *nextNode = frontNode->next;
-                delete frontNode;
-                frontNode = nextNode;
+            ListNode* nextNode;
+            while (curNode->next != NULL && curNode->val == curNode->next->val) {
+                nextNode = curNode->next;
+                delete curNode;
+                curNode = nextNode;
                 found = false;
             }
             if (found) {
-                if (backHead == NULL) {
-                    backHead = frontNode;
-                    backNode = frontNode;
+                if (newHead == NULL) {
+                    newHead = curNode;
+                    newNode = curNode;
                 }
                 else {
-                    backNode->next = frontNode;
-                    backNode = backNode->next;
+                    newNode->next = curNode;
+                    newNode = newNode->next;
                 }
+                curNode = curNode->next;
             }
-            frontNode = frontNode->next;
+            else {
+                nextNode = curNode->next;
+                delete curNode;
+                curNode = nextNode;
+            }
         }
-        if (backNode != NULL) backNode->next = NULL;
-        return backHead;
+        if (newNode) newNode->next = NULL;
+        return newHead;
     }
 };
 

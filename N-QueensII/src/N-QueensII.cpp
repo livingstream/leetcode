@@ -12,26 +12,29 @@ using namespace std;
 
 class Solution {
 public:
-    bool isSafe(int hist[], int i, int j, int col) {
-        return (hist[j] != i && abs(hist[j] - i) != col - j);
+    bool isSafe(int board[], int n, int row, int col) {
+        for (int j = 0; j < col; j++)
+            if (board[j] == row || abs(board[j] - row) == col - j)
+                return false;
+        return true;
     }
 
-    void totalNQueensHelper(int hist[], int n, int col, int &count) {
-       if (col == n) count++;
-       for (int i = 0, j = 0; i < n; i++) {
-           for (j = 0; j < col && isSafe(hist, i, j, col); j++);
-           if (j < col) continue;
-           hist[col] = i;
-           totalNQueensHelper(hist, n, col + 1, count);
-       }
-    }
+    void totalNQueensHelper(int board[], int n, int col, int &count) {
+        if (col == n) count++;
+        for (int row = 0; row < n; row++) {
+            if (isSafe(board, n, row, col)) {
+                board[col] = row;
+                totalNQueensHelper(board, n, col+1, count);
+            }
+        }
+    };
 
     int totalNQueens(int n) {
         int count = 0;
-        int hist[n];
-        totalNQueensHelper(hist, n, 0, count);
+        int board[n];
+        totalNQueensHelper(board, n, 0, count);
         return count;
-    }
+    };
 };
 
 int main() {

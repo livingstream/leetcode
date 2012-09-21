@@ -9,14 +9,16 @@
 //
 // Note:
 // If there is no such window in S that covers all characters in T, return the
-// emtpy string "".
+// empty string "".
 //
 // If there are multiple such windows, you are guaranteed that there will
 // always be only one unique minimum window in S.
 //============================================================================
 
-#include <string>
+#include <algorithm>
+#include <iostream>
 #include <climits>
+
 using namespace std;
 
 class Solution {
@@ -31,17 +33,14 @@ public:
         string res = "";
         int min = INT_MAX;
         for (size_t begin = 0, end = 0; end < S.size(); end++) {
-            int j = S[end];
-            if (needToFind[j] == 0) continue;
-            hasFound[j]++;
-            if (hasFound[j] <= needToFind[j]) count++;
+            if (needToFind[(int)S[end]] == 0) continue;
+            hasFound[(int)S[end]]++;
+            if (hasFound[(int)S[end]] <= needToFind[(int)S[end]]) count++;
 
             if (count == T.size()) {
-                int i = S[begin];
-                while (needToFind[i] == 0 || hasFound[i] > needToFind[i]) {
-                    if (hasFound[i] > needToFind[i]) hasFound[i]--;
+                while (needToFind[(int)S[begin]] == 0 || hasFound[(int)S[begin]] > needToFind[(int)S[begin]]) {
+                    if (hasFound[(int)S[begin]] > needToFind[(int)S[begin]]) hasFound[(int)S[begin]]--;
                     begin++;
-                    i = S[begin];
                 }
 
                 int len = end - begin + 1;
@@ -56,5 +55,5 @@ public:
 };
 
 int main() {
-    return 0;
+   return 0;
 }

@@ -12,7 +12,7 @@
 // [
 //   ["ABCE"],
 //   ["SFCS"],
-//  ["ADEE"]
+//   ["ADEE"]
 // ]
 // word = "ABCCED", -> returns true,
 // word = "SEE", -> returns true,

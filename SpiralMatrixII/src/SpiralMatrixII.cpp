@@ -24,15 +24,15 @@ public:
     void generateMatrixHelper(vector<vector<int> > &res, int x, int n, int k) {
         if (n <= 0) return;
         if (n == 1) {
-            res[k + n - 1][k + n - 1] = x++;
+            res[k+n-1][k+n-1] = x++;
             return;
         }
         int i = 0, j = 0;
-        for (; j < n - 1; j++) res[k + i][k + j] = x++;
-        for (; i < n - 1; i++) res[k + i][k + j] = x++;
-        for (; j > 0; j--) res[k + i][k + j] = x++;
-        for (; i > 0; i--) res[k + i][k + j] = x++;
-        generateMatrixHelper(res, x, n - 2, k + 1);
+        for (; j < n-1; j++) res[k+i][k+j] = x++;
+        for (; i < n-1; i++) res[k+i][k+j] = x++;
+        for (; j > 0; j--) res[k+i][k+j] = x++;
+        for (; i > 0; i--) res[k+i][k+j] = x++;
+        generateMatrixHelper(res, x, n-2, k+1);
     }
 
     vector<vector<int> > generateMatrix(int n) {

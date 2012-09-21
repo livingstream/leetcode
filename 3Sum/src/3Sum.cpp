@@ -24,9 +24,9 @@ public:
         int N = num.size();
         sort(num.begin(), num.end());
         vector<vector<int> > result;
-        for (int k = 0; k < N - 2; k++) {
-            int i = k + 1;
-            int j = N - 1;
+        for (int k = 0; k < N-2; k++) {
+            int i = k+1;
+            int j = N-1;
             while (i < j) {
                 int sum = num[i] + num[j] + num[k];
                 if (sum > 0) j--;

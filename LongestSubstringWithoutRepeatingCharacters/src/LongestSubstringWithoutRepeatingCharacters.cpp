@@ -15,20 +15,20 @@ class Solution {
 public:
     int lengthOfLongestSubstring(string s) {
         size_t res = 0;
-        size_t i = 0, j = 0;
+        size_t start = 0, end = 0;
         bool visited[256] = { false };
-        while (j < s.size()) {
-            if (visited[(int)s[j]]) {
-                res = max(res, j - i);
-                while (s[i] != s[j]) visited[(int)s[i++]] = false;
-                i++;
-                j++;
+        while (end < s.size()) {
+            if (visited[(int)s[end]]) {
+                res = max(res, end - start);
+                while (s[start] != s[end]) visited[(int)s[start++]] = false;
+                start++;
+                end++;
             } else {
-                visited[(int)s[j]] = true;
-                j++;
+                visited[(int)s[end]] = true;
+                end++;
             }
         }
-        res = max(res, j - i);
+        res = max(res, end - start);
         return res;
     }
 };

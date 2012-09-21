@@ -36,3 +36,7 @@ public:
         return quotient;
     }
 };
+
+int main() {
+    return 0;
+}
