@@ -26,6 +26,10 @@ using namespace std;
 class Solution {
 public:
     bool isMatch(const char* s, const char* p) {
+        return isMatch1(s, p);
+    }
+
+    bool isMatch1(const char* s, const char* p) {
         if (*s == '\0') {
             if (*p == '\0') return true;
             if (*p == '*') return isMatch(s,p+1);
@@ -36,8 +40,36 @@ public:
         if (*p=='*') return isMatch(s+1,p) || isMatch(s, p+1);
         return false;
     }
+
+    bool isMatch2(const char* s, const char* p) {
+        const char *ps, *pp;
+        bool star = false;
+        loopStart:
+        for (ps = s, pp = p; *ps; ++ps, ++pp) {
+            switch (*pp) {
+            case '?':
+                break;
+            case '*':
+                star = true;
+                s = ps, p = pp+1;
+                if (!*p) return true;
+                goto loopStart;
+            default:
+                if (*ps != *pp)
+                    goto starCheck;
+                break;
+            }
+        }
+        while (*pp == '*') ++pp;
+        return (!*pp);
+        starCheck:
+        if (!star) return false;
+        s++;
+        goto loopStart;
+        return false;
+    }
 };
 
 int main() {
-   return 0;
+    return 0;
 }
