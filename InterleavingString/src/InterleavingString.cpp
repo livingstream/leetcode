@@ -16,6 +16,11 @@ using namespace std;
 
 class Solution {
 public:
+    bool isInterleave(string s1, string s2, string s3) {
+        return isInterleave1(s1, s2, s3);
+//        return isInterleave2(s1, s2, s3);
+    }
+
     bool isInterleave1(string s1, string s2, string s3) {
         return isInterleaveHelper1(s1.c_str(), s2.c_str(), s3.c_str());
     }
@@ -63,7 +68,7 @@ public:
 
 int main() {
     Solution sol;
-    cout << sol.isInterleave2("aabcc", "dbbca", "aadbbcbcac") << endl;
-    cout << sol.isInterleave2("aabcc", "dbbca", "aadbbbaccc") << endl;
+    cout << sol.isInterleave("aabcc", "dbbca", "aadbbcbcac") << endl;
+    cout << sol.isInterleave("aabcc", "dbbca", "aadbbbaccc") << endl;
     return 0;
 }
