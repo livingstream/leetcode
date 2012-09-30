@@ -25,7 +25,7 @@ public:
         return isInterleaveHelper1(s1.c_str(), s2.c_str(), s3.c_str());
     }
 
-    bool isInterleaveHelper1(const char *s1,const char *s2,const char *s3) {
+    bool isInterleaveHelper1(const char *s1, const char *s2, const char *s3) {
         if(*s1 == '\0' && *s2 == '\0' && *s3 == '\0') return true;
         if (*s3 == '\0') return false;
         if (*s1 == '\0' && *s2 == '\0') return false;

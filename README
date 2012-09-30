@@ -5,6 +5,8 @@ AddBinary
 AddTwoNumbers
 Anagrams
 BinaryTreeInorderTraversal
+BinaryTreeLevelOrderTraversal
+BinaryTreeZigzagLevelOrderTraversal
 ClimbingStairs
 Combinations
 CombinationSum
@@ -85,6 +87,7 @@ SubsetsII
 SubstringwithConcatenationofAllWords
 SudokuSolver
 SwapNodesinPairs
+SymmetricTree
 TextJustification
 TrappingRainWater
 TwoSum
