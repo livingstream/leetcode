@@ -4,6 +4,7 @@
 AddBinary
 AddTwoNumbers
 Anagrams
+BalancedBinaryTree
 BinaryTreeInorderTraversal
 BinaryTreeLevelOrderTraversal
 BinaryTreeLevelOrderTraversalII
@@ -32,7 +33,6 @@ InterleavingString
 JumpGame
 JumpGameII
 LargestRectangleinHistogram
-LEETCODE
 LengthofLastWord
 LetterCombinationsofaPhoneNumber
 LongestCommonPrefix
