@@ -49,7 +49,7 @@ public:
     }
 
     void flatten1(TreeNode *root) {
-        TreeNode* res = root;
+        TreeNode* res = NULL;
         flattenHelper1(root, res);
         root = res;
     }
