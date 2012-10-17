@@ -56,10 +56,14 @@ public:
 
     void flattenHelper1(TreeNode *node, TreeNode *&res) {
         if (node == NULL) return;
+        TreeNode* leftSub = node->left;
+        node->left = NULL;
+        TreeNode* rightSub = node->right;
+        node->right = NULL;
         if (res == NULL) res = node;
         else res->right = node, res = res->right;
-        flattenHelper1(node->left, res);
-        flattenHelper1(node->right, res);
+        flattenHelper1(leftSub, res);
+        flattenHelper1(rightSub, res);
     }
 
     void flatten2(TreeNode *root) {

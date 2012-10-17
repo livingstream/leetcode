@@ -20,10 +20,10 @@ ConvertSortedArraytoBinarySearchTree
 ConvertSortedListtoBinarySearchTree
 CountandSay
 DecodeWays
-DepthofBinaryTree
 DivideTwoIntegers
 EditDistance
 FirstMissingPositive
+FlattenBinaryTreetoLinkedList
 GenerateParentheses
 GrayCode
 ImplementStrStr
@@ -40,12 +40,14 @@ LongestPalindromicSubstring
 LongestSubstringWithoutRepeatingCharacters
 LongestValidParentheses
 MaximalRectangle
+MaximumDepthofBinaryTree
 MaximumSubarray
 MedianofTwoSortedArrays
 MergeIntervals
 MergekSortedLists
 MergeSortedArray
 MergeTwoSortedLists
+MinimumDepthofBinaryTree
 MinimumPathSum
 MinimumWindowSubstring
 MultiplyStrings
@@ -54,6 +56,8 @@ N-Queens
 N-QueensII
 PalindromeNumber
 PartitionList
+PathSum
+PathSumII
 Permutations
 PermutationSequence
 PermutationsII
